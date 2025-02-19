@@ -1,0 +1,607 @@
+/* General Styles */
+body {
+  font-family: Tahoma, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Full viewport height */
+  margin: 0;
+  background-color: #f4f4f4;
+  position: relative;
+  overflow-x: hidden;
+}
+main {
+  flex: 1; /* Takes up remaining space */
+}
+/* Header Styles (Existing) */
+header {
+  display: flex;
+  flex-direction: row;
+  background-color: #0a0a23;
+  color: white;
+  padding: 1em 1em;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #1b1b32;
+}
+/* Dropdown Container */
+label[for="category-dropdown"] {
+  font-size: 1rem;
+  color: white;
+  margin-right: 20px; /* Space between dropdown and other elements */
+}
+
+/* Select Element */
+#category-dropdown {
+  padding: 0.5rem 1rem; /* Padding for better spacing */
+  font-size: 1rem;
+  color: white;
+  background-color: #1a1a1a; /* Dark background */
+  border: 2px solid #C5832B; /* Accent color border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer;
+  appearance: none; /* Remove default arrow */
+  -webkit-appearance: none; /* Remove default arrow for Safari */
+  -moz-appearance: none; /* Remove default arrow for Firefox */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="18px" height="18px"><path d="M7 10l5 5 5-5z"/></svg>'); /* Custom arrow */
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center; /* Position the arrow */
+  background-size: 12px; /* Size of the arrow */
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Hover and Focus States */
+#category-dropdown:hover {
+  border-color: #FFD700; /* Gold accent on hover */
+}
+
+#category-dropdown:focus {
+  outline: none; /* Remove default focus outline */
+  border-color: #FFD700; /* Gold accent on focus */
+  background-color: #333; /* Slightly lighter background on focus */
+}
+
+/* Option Elements */
+#category-dropdown option {
+  background-color: #1a1a1a; /* Dark background */
+  color: white; /* White text */
+  padding: 0.5rem; /* Padding for options */
+}
+
+header img {
+  width: 150px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 2em;
+}
+
+main h2{
+  text-align: center;
+}
+
+/* Header Center Wrapper */
+.header-center {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Space between logo and dropdown */
+}
+
+/* Hamburger Icon for Mobile */
+.hamburger {
+  display: none; /* Hidden by default */
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger .line {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 4px 0;
+}
+
+.admin{
+   display: none;
+}
+/*index/product style*/
+
+/* Category Styles */
+#categories{
+  display: flex;
+  width: 1000vw;
+  }
+.category {
+  width: 100vw;
+  padding-bottom: 4em;
+  text-align: center;
+}
+.category h3 {
+  color: #000;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #C5832B;
+  padding-bottom: 10px;
+}
+
+/* Product Styles */
+.product {
+  border: 1px solid #C5832B;
+  padding: 15px;
+  margin: 10px;
+  text-align: center;
+  width: 200px;
+  display: inline-block;
+  background-color: #fff;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.product img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.product h5 {
+  color: #000;
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+.product p {
+  color: #333;
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+.buyBtn {
+  padding: 0.5rem 3rem;
+  font-size: 1em;
+  background-color: #C5832B;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.buyBtn:hover {
+  background-color: #333; /* Darker black on hover */
+}
+
+/*Form page of contact us*/
+h1, p {
+  margin: 1em auto;
+  text-align: center;
+  color: #f5f6f7;
+  font-size: 16px;
+}
+p{
+  color: #000;
+}
+.info{
+  color: #fff;
+}
+form {
+  width: 60vw;
+  max-width: 500px;
+  min-width: 300px;
+  margin: 0 auto;
+  padding-bottom: 2em;
+  color: white;
+}
+
+fieldset {
+  border: none;
+  padding: 2rem 0;
+  border-bottom: 3px solid #3b3b4f;
+}
+
+fieldset:last-of-type {
+  border-bottom: none;
+}
+
+label {
+  display: block;
+  margin: 0.5rem 0;
+}
+
+input,
+textarea,
+select {
+  margin: 10px 0 0 0;
+  width: 100%;
+  min-height: 2em;
+}
+
+input, textarea {
+  background-color: #0a0a23;
+  border: 1px solid #0a0a23;
+  color: #ffffff;
+}
+
+.inline {
+  width: unset;
+  margin: 0 0.5em 0 0;
+  vertical-align: middle;
+}
+
+input[type="submit"] {
+  display: block;
+  width: 60%;
+  margin: 1em auto;
+  height: 2em;
+  font-size: 1.1rem;
+  background-color: #3b3b4f;
+  border-color: white;
+  min-width: 300px;
+  cursor: pointer;
+}
+
+input[type="file"] {
+  padding: 1px 2px;
+}
+.terms-cond{
+  color: #dfdfe2;
+}
+
+/*footer sytle*/
+/* Footer Styles */
+footer {
+  text-align: center;
+  background-color: #0a0a23;
+  padding: 20px 0;
+  position: relative;
+  width: 100%;
+  margin-top: auto; /* Ensures footer sticks to the bottom */
+}
+
+footer p {
+  color: #fff;
+  margin: 10px 0;
+}
+
+footer p:first-of-type {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+footer p:last-of-type {
+  border-top: 2px solid #3b3b4f;
+  padding-top: 10px;
+  margin-top: 15px;
+  font-size: 0.9rem;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Space between icons */
+  flex-wrap: wrap; /* Wrap icons on smaller screens */
+}
+
+.social-icons a {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.social-icons a:hover {
+  transform: translateY(-5px); /* Lift icon on hover */
+}
+
+.social-icons img {
+  width: 36px; /* Fixed size for icons */
+  height: 36px;
+  background-color: #fff;
+  border-radius: 15%;
+  padding: 5px; /* Adds some spacing inside the icon */
+  transition: background-color 0.3s ease;
+}
+
+.social-icons img:hover {
+  background-color: #C5832B; /* Your preferred accent color on hover */
+}
+
+/*About us style*/
+/* About Us Hero Section */
+.about-hero {
+  
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.about-hero-content {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.about-hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.about-hero p {
+  font-size: 1.2rem;
+  color: #ccc;
+}
+
+/* Vision, Mission, and History Sections */
+.vision, .mission, .history {
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #1a1a1a;
+  margin: 20px 0;
+}
+
+.vision h2, .mission h2, .history h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.vision p, .mission p, .history p {
+  font-size: 1.1rem;
+  color: #ccc;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Values Section */
+.values {
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #000;
+}
+
+.values h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.value-cards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.value-card {
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  width: 22%;
+  margin: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.value-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #e64a19
+}
+
+.value-card p {
+  font-size: 1rem;
+  color: #ccc;
+}
+
+/* Team Section */
+.team {
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #1a1a1a;
+  margin: 20px 0;
+  color: #fff;
+}
+
+.team h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.team-members {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.team-member {
+  background: #000;
+  padding: 20px;
+  border-radius: 10px;
+  width: 30%;
+  margin: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.team-member img {
+  width: 50%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.team-member h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #e64a19;
+}
+
+.team-member p {
+  font-size: 1rem;
+  color: #ccc;
+}
+
+/*Home page styles*/
+.main-home{
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  background-color: #C5832B;
+}
+
+.main-home h1, .main-home h2, .main-home h3 {
+  color: #fff;
+}
+
+.main-home p {
+  color: #ccc;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #ff5722;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #e64a19;
+}
+
+/* Hero Section */
+.hero {
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero-content {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Services Section */
+.services {
+  margin: 40px 0;
+  text-align: center;
+}
+
+.service-cards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.card {
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  width: 30%;
+  margin: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Testimonials Section */
+.testimonials {
+  margin: 40px 0;
+  text-align: center;
+}
+
+.testimonial-cards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.testimonial {
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  width: 30%;
+  margin: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.testimonial p {
+  font-style: italic;
+  color: #fff;
+}
+
+.testimonial span {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #ff5722;
+}
+@media (max-width: 768px) {
+  /* Hide the regular navigation links */
+  nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px; /* Adjust based on header height */
+    right: 0;
+    background-color: #0a0a23;
+    width: 100%;
+    text-align: center;
+    border-bottom: 2px solid #1b1b32;
+  }
+
+  nav a {
+    margin: 1em 0;
+  }
+
+  /* Show the hamburger icon */
+  .hamburger {
+    display: flex;
+  }
+
+  /* Show the navigation menu when active */
+  nav.active {
+    display: flex;
+  }
+
+  /* Center the logo and dropdown on mobile */
+  .header-center {
+    flex: 1; /* Take up remaining space */
+    justify-content: center;
+    margin-left: 20px; /* Adjust as needed */
+  }
+
+  /* Adjust the category dropdown for mobile */
+  label[for="category-dropdown"] {
+    font-size: 0.9rem; /* Smaller font for mobile */
+  }
+
+  #category-dropdown {
+    width: 100%; /* Full width on mobile */
+    margin-top: 10px; /* Space above the dropdown */
+  }
+  .product {
+    width: 150px;
+  }
+  .category h3 {
+    font-size: 1.2rem;
+  }
+  .value-card, .team-member {
+    width: 100%;
+  }
+  .card, .testimonial {
+    width: 100%;
+  }
+}
+

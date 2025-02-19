@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buyer Page</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body style="background-color: #1b1b32;">
+ <header>
+  <!-- Logo and Category Dropdown Wrapper -->
+  <div class="header-center">
+    <a href="home.html"><img src="logoNB.png" alt="LightLogo"></a>
+  </div>
+
+  <!-- Hamburger Icon for Mobile -->
+  <div class="hamburger" onclick="toggleMenu()">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+  </div>
+
+  <!-- Navigation Links -->
+  <nav id="nav-menu">
+    <a href="admin.html" class="admin">Admin</a>
+    <a href="home.html">Home</a>
+    <a href="index.html">Products</a>
+    <a href="about.html">About US</a>
+    <a href="contact.html">Contact US</a>
+  </nav>
+</header>
+  <main>
+    <h1>Contact Us</h1>
+    <p class="info">Please fill out this form with the required information</p>
+    <form method="post" action='https://register-demo.freecodecamp.org'>
+      <fieldset>
+        <label for="first-name">Enter Your First Name: <input id="first-name" name="first-name" type="text" required /></label>
+        <label for="last-name">Enter Your Last Name: <input id="last-name" name="last-name" type="text" required /></label>
+        <label for="email">Enter Your Email: <input id="email" name="email" type="email" required /></label>
+      </fieldset>
+      <fieldset>
+        <legend>Why you contact us (required)</legend>
+        <label for="personal-account"><input id="personal-account" type="radio" name="account-type" class="inline"  /> Personal Issue</label>
+        <label for="business-account"><input id="business-account" type="radio" name="account-type" class="inline" checked  /> Business Issue</label>
+      </fieldset>
+      <fieldset>
+        <label for="profile-picture">You can upload a files: <input id="profile-picture" type="file" name="file" /></label>
+        <label for="age">Input your age (years): <input id="age" type="number" name="age" min="13" max="120" /></label>
+        <label for="referrer">How did you hear about us?
+          <select id="referrer" name="referrer">
+            <option value="">(select one)</option>
+            <option value="1">Friends</option>
+            <option value="2">Facebook</option>
+            <option value="3">Telegram</option>
+            <option value="4">Google</option>
+            <option value="5">Youtube</option>
+            <option value="6">Other</option>
+          </select>
+        </label>
+        <label for="bio">Fill the issue you faced :
+          <textarea id="bio" name="bio" rows="3" cols="30" placeholder="I like coding on the beach..."></textarea>
+        </label>
+      </fieldset>
+      <label for="terms-and-conditions">
+        <input id="terms-and-conditions" type="checkbox" required name="terms-and-conditions" class="inline" /> I accept the <a href="https://www.freecodecamp.org/news/terms-of-service/" class="terms-cond">terms and conditions</a>
+      </label>
+      <input type="submit" value="Submit" />
+    </form>
+  </main>
+  <footer>
+  <p>Reach out to us directly</p>
+  <div class="social-icons">
+    <a href="#"><img src="tg36.png" alt="Telegram"></a>
+    <a href="#"><img src="whatsapp36.png" alt="WhatsApp"></a>
+    <a href="#"><img src="insta36.png" alt="Instagram"></a>
+    <a href="#"><img src="youtube36.png" alt="YouTube"></a>
+    <a href="#"><img src="x36.png" alt="X (Twitter)"></a>
+    <a href="#"><img src="in36.png" alt="LinkedIn"></a>
+    <a href="#"><img src="tiktok36.png" alt="TikTok"></a>
+  </div>
+  <p>Copyright &copy; 2025 LightInvestment.com. All Rights Reserved.</p>
+</footer>
+<script>
+    function toggleMenu() {
+  const navMenu = document.getElementById("nav-menu");
+  navMenu.classList.toggle("active");
+}
+  </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buyer Page</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  <header>
+  <!-- Logo and Category Dropdown Wrapper -->
+  <div class="header-center">
+    <a href="home.html"><img src="logoNB.png" alt="LightLogo"></a>
+  </div>
+
+  <!-- Hamburger Icon for Mobile -->
+  <div class="hamburger" onclick="toggleMenu()">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+  </div>
+
+  <!-- Navigation Links -->
+  <nav id="nav-menu">
+    <a href="admin.html" class="admin">Admin</a>
+    <a href="home.html">Home</a>
+    <a href="index.html">Products</a>
+    <a href="about.html">About US</a>
+    <a href="contact.html">Contact US</a>
+  </nav>
+</header>
+  <main class="main-home">
+    <!-- Hero Section -->
+    <section class="hero" style="background: url(hero.jpg) no-repeat center center/cover;">
+      <div class="hero-content">
+        <h1>Welcome to Light Investment</h1>
+        <p>Your trusted partner for wholesale and retail solutions.</p>
+        <a href="#services" class="btn">Explore Services</a>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+      <h2>Our Services</h2>
+      <div class="service-cards">
+        <div class="card">
+          <h3>Wholesale Solutions</h3>
+          <p>Get the best deals on bulk purchases for your business needs.</p>
+        </div>
+        <div class="card">
+          <h3>Retail Solutions</h3>
+          <p>High-quality products at competitive prices for individual customers.</p>
+        </div>
+        <div class="card">
+          <h3>Consultation</h3>
+          <p>Expert advice to help you make the right investment decisions.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+      <h2>What Our Clients Say</h2>
+      <div class="testimonial-cards">
+        <div class="testimonial">
+          <p>"Light Investment has been a game-changer for my business. Highly recommended!"</p>
+          <span>- John Doe</span>
+        </div>
+        <div class="testimonial">
+          <p>"Great service and amazing products. I will definitely come back!"</p>
+          <span>- Jane Smith</span>
+        </div>
+        <div class="testimonial">
+          <p>"Their wholesale prices are unbeatable. A trusted partner indeed."</p>
+          <span>- Mike Johnson</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+  <p>Reach out to us directly</p>
+  <div class="social-icons">
+    <a href="#"><img src="tg36.png" alt="Telegram"></a>
+    <a href="#"><img src="whatsapp36.png" alt="WhatsApp"></a>
+    <a href="#"><img src="insta36.png" alt="Instagram"></a>
+    <a href="#"><img src="youtube36.png" alt="YouTube"></a>
+    <a href="#"><img src="x36.png" alt="X (Twitter)"></a>
+    <a href="#"><img src="in36.png" alt="LinkedIn"></a>
+    <a href="#"><img src="tiktok36.png" alt="TikTok"></a>
+  </div>
+  <p>Copyright &copy; 2025 LightInvestment.com. All Rights Reserved.</p>
+</footer>
+  <script src="scripts/script.js"></script>
+  <script>
+    function toggleMenu() {
+  const navMenu = document.getElementById("nav-menu");
+  navMenu.classList.toggle("active");
+}
+  </script>
+</body>
+</html>

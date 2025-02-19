@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/admin.css">
+</head>
+<body>
+  <header>
+    <h1>Admin Panel</h1>
+    <nav>
+      <a href="index.html">Home</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Add Category</h2>
+    <form id="addCategoryForm">
+      <input type="text" id="categoryName" placeholder="Category Name" required>
+      <button type="submit">Add Category</button>
+    </form>
+
+    <h2>Add Product</h2>
+    <form id="addProductForm">
+      <select id="productCategory" required>
+        <option value="">Select Category</option>
+      </select>
+      <input type="text" id="productName" placeholder="Product Name" required>
+      <input type="number" id="productPrice" placeholder="Product Price" required>
+      <input type="text" id="productLink" placeholder="Product Link of Telgram" required>
+      <textarea id="productDescription" placeholder="Product Description" required></textarea>
+      <input type="file" id="productImage" accept="image/*" required>
+      <button type="submit">Add Product</button>
+    </form>
+  </main>
+  <script src="admin.js"></script>
+</body>
+</html>

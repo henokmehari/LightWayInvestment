@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buyer Page</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  <header>
+  <!-- Logo and Category Dropdown Wrapper -->
+  <div class="header-center">
+    <a href="home.html"><img src="logoNB.png" alt="LightLogo"></a>
+  </div>
+  <label for="category-dropdown">Choose a category: 
+      <select id="category-dropdown"></select>
+    </label>
+
+  <!-- Hamburger Icon for Mobile -->
+  <div class="hamburger" onclick="toggleMenu()">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+  </div>
+
+  <!-- Navigation Links -->
+  <nav id="nav-menu">
+    <a href="admin.html" class="admin">Admin</a>
+    <a href="home.html">Home</a>
+    <a href="#index.htm">Products</a>
+    <a href="about.html">About US</a>
+    <a href="contact.html">Contact US</a>
+  </nav>
+</header>
+   <main>
+    <h2>Welcome to LightWay Wholesales and Retail Store</h2>
+    <div id="categories"></div>
+  </main>
+  <footer>
+  <p>Reach out to us directly</p>
+  <div class="social-icons">
+    <a href="#"><img src="tg36.png" alt="Telegram"></a>
+    <a href="#"><img src="whatsapp36.png" alt="WhatsApp"></a>
+    <a href="#"><img src="insta36.png" alt="Instagram"></a>
+    <a href="#"><img src="youtube36.png" alt="YouTube"></a>
+    <a href="#"><img src="x36.png" alt="X (Twitter)"></a>
+    <a href="#"><img src="in36.png" alt="LinkedIn"></a>
+    <a href="#"><img src="tiktok36.png" alt="TikTok"></a>
+  </div>
+  <p>Copyright &copy; 2025 LightInvestment.com. All Rights Reserved.</p>
+</footer>
+  <script src="script.js"></script>
+  <script src="styles.js"></script>
+  <script>
+    function toggleMenu() {
+  const navMenu = document.getElementById("nav-menu");
+  navMenu.classList.toggle("active");
+}
+  </script>
+</body>
+</html>
