@@ -1,6 +1,7 @@
-// Import Firebase modules (if needed)
+// Initialize Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
 
 // Firebase configuration (replace with your own)
 const firebaseConfig = {
@@ -12,35 +13,28 @@ const firebaseConfig = {
   appId: "1:353368676223:web:cf998ead945c55f7cbac4a",
   measurementId: "G-K0L0T8E2TB"
 };
-
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Load existing categories and products from local storage
-let categories = JSON.parse(localStorage.getItem('categories')) || [];
-let products = JSON.parse(localStorage.getItem('products')) || [];
-
 // Add Category Form
-document.getElementById('addCategoryForm').addEventListener('submit', (e) => {
+document.getElementById('addCategoryForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const categoryName = document.getElementById('categoryName').value.trim();
   if (!categoryName) return alert('Category name is required!');
 
-  // Check if category already exists
-  if (categories.some(cat => cat.name === categoryName)) {
-    return alert('Category already exists!');
+  try {
+    // Add category to Firestore
+    await addDoc(collection(db, 'categories'), { name: categoryName });
+    alert('Category added successfully!');
+    document.getElementById('categoryName').value = ''; // Clear the input field
+    loadCategories(); // Refresh the category dropdown
+  } catch (error) {
+    console.error('Error adding category: ', error);
+    alert('Failed to add category!');
   }
-
-  categories.push({ name: categoryName });
-  localStorage.setItem('categories', JSON.stringify(categories));
-  alert('Category added successfully!');
-  loadCategories(); // Refresh the category dropdown
-  document.getElementById('categoryName').value = ''; // Clear the input field
 });
-
-// Add Product Form
-document.getElementById('addProductForm').addEventListener('submit', (e) => {
+//add product
+document.getElementById('addProductForm').addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const productCategory = document.getElementById('productCategory').value;
@@ -56,7 +50,7 @@ document.getElementById('addProductForm').addEventListener('submit', (e) => {
 
   // Convert image to Base64
   const reader = new FileReader();
-  reader.onload = function (event) {
+  reader.onload = async function (event) {
     const productImageBase64 = event.target.result;
 
     // Create product object
@@ -69,26 +63,37 @@ document.getElementById('addProductForm').addEventListener('submit', (e) => {
       image: productImageBase64,
     };
 
-    // Save product to local storage
-    products.push(product);
-    localStorage.setItem('products', JSON.stringify(products));
-
-    alert('Product added successfully!');
-    document.getElementById('addProductForm').reset(); // Clear the form
+    try {
+      // Add product to Firestore
+      await addDoc(collection(db, 'products'), product);
+      alert('Product added successfully!');
+      document.getElementById('addProductForm').reset(); // Clear the form
+    } catch (error) {
+      console.error('Error adding product: ', error);
+      alert('Failed to add product!');
+    }
   };
   reader.readAsDataURL(productImage); // Read the image file
 });
 
-// Load Categories into Select Dropdown
-function loadCategories() {
+//loading categories
+async function loadCategories() {
   const categorySelect = document.getElementById('productCategory');
   categorySelect.innerHTML = '<option value="">Select Category</option>';
-  categories.forEach(category => {
-    const option = document.createElement('option');
-    option.value = category.name;
-    option.textContent = category.name;
-    categorySelect.appendChild(option);
-  });
+
+  try {
+    // Fetch categories from Firestore
+    const querySnapshot = await getDocs(collection(db, 'categories'));
+    querySnapshot.forEach((doc) => {
+      const category = doc.data();
+      const option = document.createElement('option');
+      option.value = category.name;
+      option.textContent = category.name;
+      categorySelect.appendChild(option);
+    });
+  } catch (error) {
+    console.error('Error loading categories: ', error);
+  }
 }
 
 // Load categories when the page loads
