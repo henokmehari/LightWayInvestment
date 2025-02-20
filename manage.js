@@ -53,9 +53,13 @@ async function loadProducts() {
   snapshot.forEach(doc => {
     const product = doc.data();
     const li = document.createElement('li');
+    
+    // Escape double quotes in the product object
+    const productString = JSON.stringify(product).replace(/"/g, '&quot;');
+    
     li.innerHTML = `
       ${product.name} (${product.category})
-      <button onclick="editProduct('${doc.id}', ${JSON.stringify(product)})">Edit</button>
+      <button onclick="editProduct('${doc.id}', '${productString}')">Edit</button>
       <button onclick="deleteProduct('${doc.id}')">Delete</button>
     `;
     productsList.appendChild(li);
