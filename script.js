@@ -1,15 +1,34 @@
+const firebaseConfig = {
+  apiKey: "AIzaSyAqgQTTS7UDdKNuRSYrfZ_bA7SyESE7IW0",
+  authDomain: "mystore-bdff6.firebaseapp.com",
+  projectId: "mystore-bdff6",
+  storageBucket: "mystore-bdff6.firebasestorage.app",
+  messagingSenderId: "353368676223",
+  appId: "1:353368676223:web:cf998ead945c55f7cbac4a",
+  measurementId: "G-K0L0T8E2TB"
+};
 
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
-document.addEventListener('DOMContentLoaded', () => {
-  const categories = JSON.parse(localStorage.getItem('categories')) || [];
-  const products = JSON.parse(localStorage.getItem('products')) || [];
+//Display product
+document.addEventListener('DOMContentLoaded', async () => {
   const categoriesDiv = document.getElementById('categories');
+  categoriesDiv.innerHTML = ''; // Clear existing content
 
-  // Clear existing content
-  categoriesDiv.innerHTML = '';
+  // Fetch categories and products from Firestore
+  const categoriesSnapshot = await db.collection('categories').get();
+  const productsSnapshot = await db.collection('products').get();
+
+  const categories = [];
+  const products = [];
+
+  categoriesSnapshot.forEach(doc => categories.push(doc.data()));
+  productsSnapshot.forEach(doc => products.push(doc.data()));
 
   // Display products by category
-  categories.forEach((category, index) => {
+  categories.forEach(category => {
     const categoryProducts = products.filter(product => product.category === category.name);
     if (categoryProducts.length > 0) {
       const categoryDiv = document.createElement('div');
@@ -17,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
       categoryDiv.innerHTML = `<h3 class="option">${category.name}</h3>`;
 
       categoryProducts.forEach(product => {
-
         const productDiv = document.createElement('div');
         productDiv.classList.add('product');
         productDiv.innerHTML = `
@@ -31,44 +49,22 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       categoriesDiv.appendChild(categoryDiv);
-
     }
   });
-
-
-
 });
-//dropDown list page
-// Function to populate the dropdown
-function populateDropdown() {
-    // Retrieve the JSON data from local storage
-    const categoriesJSON = localStorage.getItem('categories');
 
-    // Check if data exists
-    if (!categoriesJSON) {
-        console.error('No data found in local storage for key "categories".');
-        return;
-    }
+//load to the product dropdown page//
+async function populateDropdown() {
+  const dropdown = document.getElementById('category-dropdown');
+  dropdown.innerHTML = '<option value="" disabled selected>Select a products</option>';
 
-    // Parse the JSON data
-    const categories = JSON.parse(categoriesJSON);
-
-    // Get the dropdown element
-    const dropdown = document.getElementById('category-dropdown');
-
-    // Clear any existing options
-    dropdown.innerHTML = '<option value="" disabled selected>Select a products</option>';
-
-    // Populate the dropdown with the "name" values
-    categories.forEach((category, index) => {
-        const option = document.createElement('option');
-              option.innerHTML = `<h5 class="options">${category.name}</h5>`;
-              dropdown.appendChild(option); // Add the option to the dropdown
-    });
-
-    // Add an event listener to handle selection
-    
+  const snapshot = await db.collection('categories').get();
+  snapshot.forEach(doc => {
+    const category = doc.data();
+    const option = document.createElement('option');
+    option.innerHTML = `<h5 class="options">${category.name}</h5>`;
+    dropdown.appendChild(option);
+  });
 }
 
-// Call the function to populate the dropdown
 populateDropdown();
