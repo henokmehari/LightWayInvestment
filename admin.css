@@ -140,6 +140,7 @@ button:active {
   display: block;
   margin-bottom: 8px;
   font-weight: bold;
+  color: #000;
 }
 
 #edit-form input,
