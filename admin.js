@@ -1,6 +1,8 @@
+// Import Firebase modules (if needed)
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { getFirestore } from "firebase/firestore";
 
+// Firebase configuration (replace with your own)
 const firebaseConfig = {
   apiKey: "AIzaSyAqgQTTS7UDdKNuRSYrfZ_bA7SyESE7IW0",
   authDomain: "mystore-bdff6.firebaseapp.com",
@@ -13,29 +15,32 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const db = getFirestore(app);
 
+// Load existing categories and products from local storage
+let categories = JSON.parse(localStorage.getItem('categories')) || [];
+let products = JSON.parse(localStorage.getItem('products')) || [];
 
-//add category
-document.getElementById('addCategoryForm').addEventListener('submit', async (e) => {
+// Add Category Form
+document.getElementById('addCategoryForm').addEventListener('submit', (e) => {
   e.preventDefault();
   const categoryName = document.getElementById('categoryName').value.trim();
   if (!categoryName) return alert('Category name is required!');
 
   // Check if category already exists
-  const snapshot = await db.collection('categories').where('name', '==', categoryName).get();
-  if (!snapshot.empty) return alert('Category already exists!');
+  if (categories.some(cat => cat.name === categoryName)) {
+    return alert('Category already exists!');
+  }
 
-  // Add category to Firestore
-  await db.collection('categories').add({ name: categoryName });
+  categories.push({ name: categoryName });
+  localStorage.setItem('categories', JSON.stringify(categories));
   alert('Category added successfully!');
   loadCategories(); // Refresh the category dropdown
   document.getElementById('categoryName').value = ''; // Clear the input field
 });
 
-
-//add products 
-document.getElementById('addProductForm').addEventListener('submit', async (e) => {
+// Add Product Form
+document.getElementById('addProductForm').addEventListener('submit', (e) => {
   e.preventDefault();
 
   const productCategory = document.getElementById('productCategory').value;
@@ -51,7 +56,7 @@ document.getElementById('addProductForm').addEventListener('submit', async (e) =
 
   // Convert image to Base64
   const reader = new FileReader();
-  reader.onload = async function (event) {
+  reader.onload = function (event) {
     const productImageBase64 = event.target.result;
 
     // Create product object
@@ -64,25 +69,27 @@ document.getElementById('addProductForm').addEventListener('submit', async (e) =
       image: productImageBase64,
     };
 
-    // Save product to Firestore
-    await db.collection('products').add(product);
+    // Save product to local storage
+    products.push(product);
+    localStorage.setItem('products', JSON.stringify(products));
+
     alert('Product added successfully!');
     document.getElementById('addProductForm').reset(); // Clear the form
   };
   reader.readAsDataURL(productImage); // Read the image file
 });
 
-//load category to the 
-async function loadCategories() {
+// Load Categories into Select Dropdown
+function loadCategories() {
   const categorySelect = document.getElementById('productCategory');
   categorySelect.innerHTML = '<option value="">Select Category</option>';
-
-  const snapshot = await db.collection('categories').get();
-  snapshot.forEach(doc => {
-    const category = doc.data();
+  categories.forEach(category => {
     const option = document.createElement('option');
     option.value = category.name;
     option.textContent = category.name;
     categorySelect.appendChild(option);
   });
 }
+
+// Load categories when the page loads
+loadCategories();
