@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Products and Categories</title>
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="manage.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Admin Panel</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="manage.html">Home</a>
+    </nav>
+  </header>
+  <h1>Manage Products and Categories</h1>
+
+  <!-- Categories Section -->
+  <section>
+    <h2>Categories</h2>
+    <ul id="categories-list"></ul>
+  </section>
+
+  <!-- Products Section -->
+  <section>
+    <h2>Products</h2>
+    <ul id="products-list"></ul>
+  </section>
+
+  <!-- Edit Modal (for both categories and products) -->
+  <div id="edit-modal" style="display: none;">
+    <h2>Edit</h2>
+    <form id="edit-form">
+      <label for="edit-name">Name:</label>
+      <input type="text" id="edit-name" required>
+      <label for="edit-price">Price:</label>
+      <input type="text" id="edit-price">
+      <label for="edit-description">Description:</label>
+      <textarea id="edit-description"></textarea>
+      <label for="edit-link">Link:</label>
+      <input type="text" id="edit-link">
+      <button type="submit">Save Changes</button>
+      <button type="button" id="cancel-edit">Cancel</button>
+    </form>
+  </div>
+</body>
+</html>
