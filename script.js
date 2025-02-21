@@ -114,7 +114,8 @@ document.getElementById('category-dropdown').addEventListener('change', async (e
             <a href="${product.link}" class="buyBtn" target='_blank'>Buy</a>
           `;
           categoryDiv.appendChild(productDiv);
-      };
+      });
+      }
     });
   } catch (error) {
     console.error('Error fetching products: ', error);
