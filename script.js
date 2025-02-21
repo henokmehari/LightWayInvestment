@@ -98,7 +98,7 @@ document.getElementById('category-dropdown').addEventListener('change', async (e
     const snapshot = await getDocs(collection(db, 'products'));
     snapshot.forEach(doc => {
       const product = doc.data();
-      if (product.category === selectedCategory) 
+      if (product.category === selectedCategory) {
         const productDiv = document.createElement('div');
         const productTitle = document.createElement('h1');
               productsTitle.innerHTML = ` <h3 class="option">${product.category}</h3>`;
