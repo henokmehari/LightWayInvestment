@@ -98,18 +98,22 @@ document.getElementById('category-dropdown').addEventListener('change', async (e
     const snapshot = await getDocs(collection(db, 'products'));
     snapshot.forEach(doc => {
       const product = doc.data();
-      if (product.category === selectedCategory) {
-        const categoryName = document.createElement('label');
-              categoryName.innerHTML = `<h1>${product.category}</h1>`;
+      if (product.category === selectedCategory) 
         const productDiv = document.createElement('div');
+        const productsDiv = document.createElement('div');
+        const productTitle = document.createElement('h1');
+              productsTitle.innerHTML = ` <h3 class="option">${product.category}</h3>`;
         productDiv.classList.add('category');
-        productDiv.innerHTML = `
+        producstDiv.classList.add('product');
+        productsDiv.innerHTML = `
           <img src="${product.image}" alt="${product.name}" width="100">
           <h4>${product.name}</h4>
           <p>Price: ${product.price}</p>
           <p>${product.description}</p>
           <a href="${product.link}" class="buyBtn" target='_blank'>Buy</a>
         `;
+        productDiv.appendChild(producstDiv);
+        categoriesDiv.appendChild(productTitles);
         categoriesDiv.appendChild(productDiv);
       }
     });
