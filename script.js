@@ -89,7 +89,7 @@ document.getElementById('category-dropdown').addEventListener('change', async (e
   const selectedCategory = e.target.value;
   const categoriesDiv = document.getElementById('categories');
   categoriesDiv.innerHTML = ''; // Clear existing content
-
+  
   if (!selectedCategory) return;
 
   try {
@@ -106,6 +106,7 @@ document.getElementById('category-dropdown').addEventListener('change', async (e
           <p>${product.description}</p>
           <a href="${product.link}" class="buyBtn" target='_blank'>Buy</a>
         `;
+        categoryDiv.innerHTML = `<h3 class="option">${category.name}</h3>`;
         categoriesDiv.appendChild(productDiv);
       }
     });
