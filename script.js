@@ -106,7 +106,6 @@ document.getElementById('category-dropdown').addEventListener('change', async (e
           <p>${product.description}</p>
           <a href="${product.link}" class="buyBtn" target='_blank'>Buy</a>
         `;
-        categoryDiv.innerHTML = `<h3 class="option">${category.name}</h3>`;
         categoriesDiv.appendChild(productDiv);
       }
     });
