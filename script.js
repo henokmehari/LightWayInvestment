@@ -1,5 +1,3 @@
-
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
@@ -62,6 +60,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error('Error fetching data: ', error);
     alert('Failed to load products. Please try again later.');
   }
+
+  // Populate the dropdown with categories
+  await populateDropdown();
 });
 
 // Populate the dropdown with categories
@@ -83,10 +84,7 @@ async function populateDropdown() {
   }
 }
 
-// Load categories when the page loads
-document.addEventListener('DOMContentLoaded', () => {
-  populateDropdown();
-});
+// Handle dropdown change event
 document.getElementById('category-dropdown').addEventListener('change', async (e) => {
   const selectedCategory = e.target.value;
   const categoriesDiv = document.getElementById('categories');
@@ -99,22 +97,16 @@ document.getElementById('category-dropdown').addEventListener('change', async (e
     snapshot.forEach(doc => {
       const product = doc.data();
       if (product.category === selectedCategory) {
-        const categoryDiv = document.createElement('div');
-        categoryDiv.classList.add('category');
-        categoryDiv.innerHTML = `<h3 class="option">${product.name}</h3>`;
-
-        categoryProducts.forEach(product => {
-          const productDiv = document.createElement('div');
-          productDiv.classList.add('product');
-          productDiv.innerHTML = `
-            <img src="${product.image}" alt="${product.name}" width="100">
-            <h4>${product.name}</h4>
-            <p>Price: ${product.price}</p>
-            <p>${product.description}</p>
-            <a href="${product.link}" class="buyBtn" target='_blank'>Buy</a>
-          `;
-          categoryDiv.appendChild(productDiv);
-      });
+        const productDiv = document.createElement('div');
+        productDiv.classList.add('product');
+        productDiv.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" width="100">
+          <h4>${product.name}</h4>
+          <p>Price: ${product.price}</p>
+          <p>${product.description}</p>
+          <a href="${product.link}" class="buyBtn" target='_blank'>Buy</a>
+        `;
+        categoriesDiv.appendChild(productDiv);
       }
     });
   } catch (error) {
