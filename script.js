@@ -99,22 +99,21 @@ document.getElementById('category-dropdown').addEventListener('change', async (e
     snapshot.forEach(doc => {
       const product = doc.data();
       if (product.category === selectedCategory) {
-        const productDiv = document.createElement('div');
-        const productTitle = document.createElement('h1');
-              productsTitle.innerHTML = ` <h3 class="option">${product.category}</h3>`;
-        productDiv.classList.add('category');
-        producstDiv.classList.add('product');
-        productsDiv.innerHTML = `
-        <div class="option">
-          <img src="${product.image}" alt="${product.name}" width="100">
-          <h4>${product.name}</h4>
-          <p>Price: ${product.price}</p>
-          <p>${product.description}</p>
-          <a href="${product.link}" class="buyBtn" target='_blank'>Buy</a>
-        </div>
-        `;
-        categoriesDiv.appendChild(productTitles);
-        categoriesDiv.appendChild(productDiv);
+        const categoryDiv = document.createElement('div');
+        categoryDiv.classList.add('category');
+        categoryDiv.innerHTML = `<h3 class="option">${category.name}</h3>`;
+
+        categoryProducts.forEach(product => {
+          const productDiv = document.createElement('div');
+          productDiv.classList.add('product');
+          productDiv.innerHTML = `
+            <img src="${product.image}" alt="${product.name}" width="100">
+            <h4>${product.name}</h4>
+            <p>Price: ${product.price}</p>
+            <p>${product.description}</p>
+            <a href="${product.link}" class="buyBtn" target='_blank'>Buy</a>
+          `;
+          categoryDiv.appendChild(productDiv);
       }
     });
   } catch (error) {
