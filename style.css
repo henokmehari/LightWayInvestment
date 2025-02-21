@@ -135,6 +135,7 @@ main h2{
 #categories{
   display: flex;
   width: 1000vw;
+  text-align: center;
   }
 .category {
   width: 100vw;
