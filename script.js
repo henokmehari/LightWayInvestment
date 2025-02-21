@@ -101,7 +101,7 @@ document.getElementById('category-dropdown').addEventListener('change', async (e
       if (product.category === selectedCategory) {
         const categoryDiv = document.createElement('div');
         categoryDiv.classList.add('category');
-        categoryDiv.innerHTML = `<h3 class="option">${category.name}</h3>`;
+        categoryDiv.innerHTML = `<h3 class="option">${product.name}</h3>`;
 
         categoryProducts.forEach(product => {
           const productDiv = document.createElement('div');
