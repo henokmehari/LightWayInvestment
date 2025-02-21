@@ -66,19 +66,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // Populate the dropdown with categories
 async function populateDropdown() {
+  const dropdown = document.getElementById('category-dropdown');
+  dropdown.innerHTML = '<option value="" disabled selected>Select a category</option>';
+
   try {
-    // Fetch categories from Firestore
-    const categoriesSnapshot = await getDocs(collection(db, 'categories'));
-    const categories = categoriesSnapshot.docs.map(doc => doc.data());
-
-    // Get the dropdown element
-    const dropdown = document.getElementById('category-dropdown');
-
-    // Clear any existing options
-    dropdown.innerHTML = '<option value="" disabled selected>Select a products</option>';
-
-    // Populate the dropdown with the "name" values
-    categories.forEach(category => {
+    const snapshot = await getDocs(collection(db, 'categories'));
+    snapshot.forEach(doc => {
+      const category = doc.data();
       const option = document.createElement('option');
       option.value = category.name;
       option.textContent = category.name;
@@ -86,9 +80,38 @@ async function populateDropdown() {
     });
   } catch (error) {
     console.error('Error fetching categories: ', error);
-    alert('Failed to load categories. Please try again later.');
   }
 }
 
-// Call the function to populate the dropdown
-populateDropdown();
+// Load categories when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+  populateDropdown();
+});
+document.getElementById('category-dropdown').addEventListener('change', async (e) => {
+  const selectedCategory = e.target.value;
+  const categoriesDiv = document.getElementById('categories');
+  categoriesDiv.innerHTML = ''; // Clear existing content
+
+  if (!selectedCategory) return;
+
+  try {
+    const snapshot = await getDocs(collection(db, 'products'));
+    snapshot.forEach(doc => {
+      const product = doc.data();
+      if (product.category === selectedCategory) {
+        const productDiv = document.createElement('div');
+        productDiv.classList.add('category');
+        productDiv.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" width="100">
+          <h4>${product.name}</h4>
+          <p>Price: ${product.price}</p>
+          <p>${product.description}</p>
+          <a href="${product.link}" class="buyBtn" target='_blank'>Buy</a>
+        `;
+        categoriesDiv.appendChild(productDiv);
+      }
+    });
+  } catch (error) {
+    console.error('Error fetching products: ', error);
+  }
+});
