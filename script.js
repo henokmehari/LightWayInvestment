@@ -99,6 +99,8 @@ document.getElementById('category-dropdown').addEventListener('change', async (e
     snapshot.forEach(doc => {
       const product = doc.data();
       if (product.category === selectedCategory) {
+        const categoryName = document.creatElement('label');
+              categoryName.innerHTML = `<h1>${category.name}</h1>`;
         const productDiv = document.createElement('div');
         productDiv.classList.add('category');
         productDiv.innerHTML = `
