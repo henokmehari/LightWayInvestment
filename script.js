@@ -100,7 +100,7 @@ document.getElementById('category-dropdown').addEventListener('change', async (e
       const product = doc.data();
       if (product.category === selectedCategory) {
         const categoryName = document.createElement('label');
-              categoryName.innerHTML = `<h1>${category.name}</h1>`;
+              categoryName.innerHTML = `<h1>${product.category}</h1>`;
         const productDiv = document.createElement('div');
         productDiv.classList.add('category');
         productDiv.innerHTML = `
