@@ -111,7 +111,7 @@ document.getElementById('category-dropdown').addEventListener('change', async (e
         //added new
         const categoryDiv = document.createElement('div');
         categoryDiv.classList.add('category');
-        categoryDiv.innerHTML = `<h3 class="option">${category.name}</h3>`;
+        categoryDiv.innerHTML = `<h3 class="option">${product.name}</h3>`;
         //ended new added
         const productDiv = document.createElement('div');
         productDiv.classList.add('product');
