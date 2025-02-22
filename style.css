@@ -81,6 +81,7 @@ main h2{
 /*index/product style*/
 #categories{
   display: flex;
+  flex-wrap: wrap;
   width: 100vw;
   text-align: center;
   }
