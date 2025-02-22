@@ -53,6 +53,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             <source src="${product.video}" type="video/ogg">
                Your browser does not support the video tag.
            </video>
+           <button class="prev">&#10094;</button>
+           <button class="next">&#10095;</button>
            </div>
             <h4>${product.name}</h4>
             <p>Price: ${product.price}</p>
@@ -117,6 +119,8 @@ document.getElementById('category-dropdown').addEventListener('change', async (e
             <source src="${product.video}" type="video/mp4">
                Your browser does not support the video tag.
            </video>
+           <button class="prev">&#10094;</button>
+           <button class="next">&#10095;</button>
            </div>
           <h4>${product.name}</h4>
           <p>Price: ${product.price}</p>
