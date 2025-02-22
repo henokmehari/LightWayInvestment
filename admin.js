@@ -47,7 +47,7 @@ document.getElementById('addProductForm').addEventListener('submit', async (e) =
   const productImage3 = document.getElementById('productImage3').files[0];
   const productVideo = document.getElementById('productVideo').files[0];
 
-  if (!productCategory || !productName || !productPrice || !productDescription || !productLink || !productImage1 || !productImage2 || !productImage3 || !productVideo) {
+  if (!productCategory || !productName || !productPrice || !productDescription || !productLink || !productImage1) {
     return alert('All fields are required!');
   }
 
