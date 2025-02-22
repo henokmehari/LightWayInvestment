@@ -115,6 +115,7 @@ main h2{
   position: relative;
   width: 100%;
   max-width: 190px; /* Adjust as needed */
+  height: 100px;
   overflow: hidden;
   margin: 0 auto;
   border: 2px solid #ccc;
