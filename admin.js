@@ -2,13 +2,12 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
-
 // Firebase configuration (replace with your own)
 const firebaseConfig = {
   apiKey: "AIzaSyAqgQTTS7UDdKNuRSYrfZ_bA7SyESE7IW0",
   authDomain: "mystore-bdff6.firebaseapp.com",
   projectId: "mystore-bdff6",
-  storageBucket: "mystore-bdff6.firebasestorage.app",
+  storageBucket: "mystore-bdff6.appspot.com",
   messagingSenderId: "353368676223",
   appId: "1:353368676223:web:cf998ead945c55f7cbac4a",
   measurementId: "G-K0L0T8E2TB"
@@ -33,7 +32,8 @@ document.getElementById('addCategoryForm').addEventListener('submit', async (e) 
     alert('Failed to add category!');
   }
 });
-//add product
+
+// Add Product Form
 document.getElementById('addProductForm').addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -42,16 +42,33 @@ document.getElementById('addProductForm').addEventListener('submit', async (e) =
   const productPrice = document.getElementById('productPrice').value.trim();
   const productDescription = document.getElementById('productDescription').value.trim();
   const productLink = document.getElementById('productLink').value.trim();
-  const productImage = document.getElementById('productImage').files[0];
+  const productImage1 = document.getElementById('productImage1').files[0];
+  const productImage2 = document.getElementById('productImage2').files[0];
+  const productImage3 = document.getElementById('productImage3').files[0];
+  const productVideo = document.getElementById('productVideo').files[0];
 
-  if (!productCategory || !productName || !productPrice || !productDescription || !productImage || !productLink) {
+  if (!productCategory || !productName || !productPrice || !productDescription || !productLink || !productImage1 || !productImage2 || !productImage3 || !productVideo) {
     return alert('All fields are required!');
   }
 
-  // Convert image to Base64
-  const reader = new FileReader();
-  reader.onload = async function (event) {
-    const productImageBase64 = event.target.result;
+  // Function to read a file and return a Base64 data URL
+  const readFileAsDataURL = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => reject(reader.error);
+      reader.readAsDataURL(file);
+    });
+  };
+
+  try {
+    // Read all files as Base64
+    const [image1Base64, image2Base64, image3Base64, videoBase64] = await Promise.all([
+      readFileAsDataURL(productImage1),
+      readFileAsDataURL(productImage2),
+      readFileAsDataURL(productImage3),
+      readFileAsDataURL(productVideo),
+    ]);
 
     // Create product object
     const product = {
@@ -60,23 +77,23 @@ document.getElementById('addProductForm').addEventListener('submit', async (e) =
       price: productPrice,
       description: productDescription,
       link: productLink,
-      image: productImageBase64,
+      image1: image1Base64,
+      image2: image2Base64,
+      image3: image3Base64,
+      video: videoBase64,
     };
 
-    try {
-      // Add product to Firestore
-      await addDoc(collection(db, 'products'), product);
-      alert('Product added successfully!');
-      document.getElementById('addProductForm').reset(); // Clear the form
-    } catch (error) {
-      console.error('Error adding product: ', error);
-      alert('Failed to add product!');
-    }
-  };
-  reader.readAsDataURL(productImage); // Read the image file
+    // Add product to Firestore
+    await addDoc(collection(db, 'products'), product);
+    alert('Product added successfully!');
+    document.getElementById('addProductForm').reset(); // Clear the form
+  } catch (error) {
+    console.error('Error adding product: ', error);
+    alert('Failed to add product!');
+  }
 });
 
-//loading categories
+// Load Categories
 async function loadCategories() {
   const categorySelect = document.getElementById('productCategory');
   categorySelect.innerHTML = '<option value="">Select Category</option>';
