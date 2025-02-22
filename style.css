@@ -110,7 +110,90 @@ main h2{
   border-radius: 10px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+/* Container for the slideshow */
+.listOfItem {
+  position: relative;
+  width: 100%;
+  max-width: 190px; /* Adjust as needed */
+  overflow: hidden;
+  margin: 0 auto;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+}
 
+/* Style for images and video inside listOfItem */
+.listOfItem img,
+.listOfItem video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the content covers the container */
+  opacity: 0;
+  animation: slideShow 16s infinite; /* Adjust timing as needed */
+}
+
+/* Keyframes for slideshow */
+@keyframes slideShow {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  5% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  25% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  30% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+/* Delay each item's animation */
+.listOfItem img:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.listOfItem img:nth-child(2) {
+  animation-delay: 4s; /* Adjust delay based on total animation duration */
+}
+
+.listOfItem img:nth-child(3) {
+  animation-delay: 8s; /* Adjust delay based on total animation duration */
+}
+
+.listOfItem video {
+  animation-delay: 12s; /* Adjust delay based on total animation duration */
+}
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
 .product:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
