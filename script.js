@@ -44,14 +44,16 @@ document.addEventListener('DOMContentLoaded', async () => {
           const productDiv = document.createElement('div');
           productDiv.classList.add('product');
           productDiv.innerHTML = `
+          <div class="listOfItem">
             <img src="${product.image1}" alt="${product.name}" width="100">
              <img src="${product.image2}" alt="${product.name}" width="100">
               <img src="${product.image3}" alt="${product.name}" width="100">
-            <video width="320" height="240" controls>
+            <video width="320" height="100" controls>
             <source src="${product.video}" type="video/mp4">
             <source src="${product.video}" type="video/ogg">
                Your browser does not support the video tag.
            </video>
+           </div>
             <h4>${product.name}</h4>
             <p>Price: ${product.price}</p>
             <p>${product.description}</p>
