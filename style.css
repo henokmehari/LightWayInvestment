@@ -81,7 +81,7 @@ main h2{
 /*index/product style*/
 #categories{
   display: flex;
-  width: 1000vw;
+  width: 100vw;
   text-align: center;
   }
 .category {
