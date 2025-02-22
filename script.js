@@ -108,6 +108,11 @@ document.getElementById('category-dropdown').addEventListener('change', async (e
     snapshot.forEach(doc => {
       const product = doc.data();
       if (product.category === selectedCategory) {
+        //added new
+        const categoryDiv = document.createElement('div');
+        categoryDiv.classList.add('category');
+        categoryDiv.innerHTML = `<h3 class="option">${category.name}</h3>`;
+        //ended new added
         const productDiv = document.createElement('div');
         productDiv.classList.add('product');
         productDiv.innerHTML = `
@@ -127,7 +132,8 @@ document.getElementById('category-dropdown').addEventListener('change', async (e
           <p>${product.description}</p>
           <a href="${product.link}" class="buyBtn" target='_blank'>Buy</a>
         `;
-        categoriesDiv.appendChild(productDiv);
+        categoryDiv.appendChild(productDiv);
+        categoriesDiv.appendChild(categoryDiv);
       }
     });
   } catch (error) {
