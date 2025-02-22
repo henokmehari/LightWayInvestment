@@ -45,6 +45,12 @@ document.addEventListener('DOMContentLoaded', async () => {
           productDiv.classList.add('product');
           productDiv.innerHTML = `
             <img src="${product.image}" alt="${product.name}" width="100">
+             <img src="${product.image}" alt="${product.name}" width="100">
+              <img src="${product.image}" alt="${product.name}" width="100">
+            <video width="320" height="240" controls>
+            <source src="${product.video}" type="video/mp4">
+               Your browser does not support the video tag.
+           </video>
             <h4>${product.name}</h4>
             <p>Price: ${product.price}</p>
             <p>${product.description}</p>
@@ -101,6 +107,12 @@ document.getElementById('category-dropdown').addEventListener('change', async (e
         productDiv.classList.add('product');
         productDiv.innerHTML = `
           <img src="${product.image}" alt="${product.name}" width="100">
+           <img src="${product.image}" alt="${product.name}" width="100">
+            <img src="${product.image}" alt="${product.name}" width="100">
+          <video width="320" height="240" controls>
+            <source src="${product.video}" type="video/mp4">
+               Your browser does not support the video tag.
+           </video>
           <h4>${product.name}</h4>
           <p>Price: ${product.price}</p>
           <p>${product.description}</p>
