@@ -1,16 +1,25 @@
-window.onload = function () {
-    const categories = document.querySelectorAll(".category");
-    const selects = document.querySelectorAll('select');
+let currentIndex = 0;
+const items = document.querySelectorAll('.listOfItem img, .listOfItem video');
+const totalItems = items.length;
 
-    selects.forEach((selectElement) => {
-        selectElement.addEventListener('change', (event) => {
-            const selectedIndex = event.target.selectedIndex;
+function showItem(index) {
+  items.forEach((item, i) => {
+    item.style.opacity = i === index ? 1 : 0;
+  });
+}
 
-            // Apply the transform to each category element
-            categories.forEach((category, index) => {
-                category.style.transform = `translateX(${-100 * selectedIndex +100}vw)`;
- 
-            });
-        });
-    });
-};
+document.querySelector('.next').addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % totalItems;
+  showItem(currentIndex);
+});
+
+document.querySelector('.prev').addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+  showItem(currentIndex);
+});
+
+// Auto-play the slideshow
+setInterval(() => {
+  currentIndex = (currentIndex + 1) % totalItems;
+  showItem(currentIndex);
+}, 4000); // Adjust timing as needed
