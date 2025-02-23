@@ -1,4 +1,4 @@
-let currentIndex = 0;
+/* let currentIndex = 0;
 const items = document.querySelectorAll('.listOfItem img, .listOfItem video');
 const totalItems = items.length;
 
@@ -22,4 +22,4 @@ document.querySelector('.prev').addEventListener('click', () => {
 setInterval(() => {
   currentIndex = (currentIndex + 1) % totalItems;
   showItem(currentIndex);
-}, 4000); // Adjust timing as needed
+}, 4000); // Adjust timing as needed */
