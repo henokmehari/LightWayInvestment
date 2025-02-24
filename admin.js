@@ -51,9 +51,14 @@ document.getElementById('addProductForm').addEventListener('submit', async (e) =
     return alert('All fields are required!');
   }
 
+  if (isNaN(productPrice) || Number(productPrice) <= 0) {
+    return alert('Product price must be a valid positive number!');
+  }
+
   // Function to read a file and return a Base64 data URL
   const readFileAsDataURL = (file) => {
     return new Promise((resolve, reject) => {
+      if (!file) return resolve(null); // Handle optional files
       const reader = new FileReader();
       reader.onload = () => resolve(reader.result);
       reader.onerror = () => reject(reader.error);
@@ -74,7 +79,7 @@ document.getElementById('addProductForm').addEventListener('submit', async (e) =
     const product = {
       category: productCategory,
       name: productName,
-      price: productPrice,
+      price: parseFloat(productPrice), // Ensure price is a number
       description: productDescription,
       link: productLink,
       image1: image1Base64,
