@@ -1,7 +1,6 @@
 // Initialize Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js";
 
 // Firebase configuration (replace with your own)
 const firebaseConfig = {
@@ -15,7 +14,24 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const storage = getStorage(app);
+
+// Add Category Form
+document.getElementById('addCategoryForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const categoryName = document.getElementById('categoryName').value.trim();
+  if (!categoryName) return alert('Category name is required!');
+
+  try {
+    // Add category to Firestore
+    await addDoc(collection(db, 'categories'), { name: categoryName });
+    alert('Category added successfully!');
+    document.getElementById('categoryName').value = ''; // Clear the input field
+    loadCategories(); // Refresh the category dropdown
+  } catch (error) {
+    console.error('Error adding category: ', error);
+    alert('Failed to add category!');
+  }
+});
 
 // Add Product Form
 document.getElementById('addProductForm').addEventListener('submit', async (e) => {
@@ -29,7 +45,6 @@ document.getElementById('addProductForm').addEventListener('submit', async (e) =
   const productImage1 = document.getElementById('productImage1').files[0];
   const productImage2 = document.getElementById('productImage2').files[0];
   const productImage3 = document.getElementById('productImage3').files[0];
-  const productVideo = document.getElementById('productVideo').files[0];
 
   if (!productCategory || !productName || !productPrice || !productDescription || !productLink || !productImage1) {
     return alert('All fields are required!');
@@ -51,15 +66,7 @@ document.getElementById('addProductForm').addEventListener('submit', async (e) =
   };
 
   try {
-    // Upload video to Firebase Storage
-    let videoUrl = null;
-    if (productVideo) {
-      const videoRef = ref(storage, `videos/${productVideo.name}`);
-      await uploadBytes(videoRef, productVideo);
-      videoUrl = await getDownloadURL(videoRef);
-    }
-
-    // Read all images as Base64
+    // Read all files as Base64
     const [image1Base64, image2Base64, image3Base64] = await Promise.all([
       readFileAsDataURL(productImage1),
       readFileAsDataURL(productImage2),
@@ -76,7 +83,6 @@ document.getElementById('addProductForm').addEventListener('submit', async (e) =
       image1: image1Base64,
       image2: image2Base64,
       image3: image3Base64,
-      video: videoUrl, // Store the video URL
     };
 
     // Add product to Firestore
