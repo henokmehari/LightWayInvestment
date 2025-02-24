@@ -1,6 +1,7 @@
 // Initialize Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js";
 
 // Firebase configuration (replace with your own)
 const firebaseConfig = {
@@ -14,24 +15,7 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
-// Add Category Form
-document.getElementById('addCategoryForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const categoryName = document.getElementById('categoryName').value.trim();
-  if (!categoryName) return alert('Category name is required!');
-
-  try {
-    // Add category to Firestore
-    await addDoc(collection(db, 'categories'), { name: categoryName });
-    alert('Category added successfully!');
-    document.getElementById('categoryName').value = ''; // Clear the input field
-    loadCategories(); // Refresh the category dropdown
-  } catch (error) {
-    console.error('Error adding category: ', error);
-    alert('Failed to add category!');
-  }
-});
+const storage = getStorage(app);
 
 // Add Product Form
 document.getElementById('addProductForm').addEventListener('submit', async (e) => {
@@ -67,12 +51,19 @@ document.getElementById('addProductForm').addEventListener('submit', async (e) =
   };
 
   try {
-    // Read all files as Base64
-    const [image1Base64, image2Base64, image3Base64, videoBase64] = await Promise.all([
+    // Upload video to Firebase Storage
+    let videoUrl = null;
+    if (productVideo) {
+      const videoRef = ref(storage, `videos/${productVideo.name}`);
+      await uploadBytes(videoRef, productVideo);
+      videoUrl = await getDownloadURL(videoRef);
+    }
+
+    // Read all images as Base64
+    const [image1Base64, image2Base64, image3Base64] = await Promise.all([
       readFileAsDataURL(productImage1),
       readFileAsDataURL(productImage2),
       readFileAsDataURL(productImage3),
-      readFileAsDataURL(productVideo),
     ]);
 
     // Create product object
@@ -85,7 +76,7 @@ document.getElementById('addProductForm').addEventListener('submit', async (e) =
       image1: image1Base64,
       image2: image2Base64,
       image3: image3Base64,
-      video: videoBase64,
+      video: videoUrl, // Store the video URL
     };
 
     // Add product to Firestore
